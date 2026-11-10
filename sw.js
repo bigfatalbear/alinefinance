@@ -1,4 +1,4 @@
-const CACHE = "alinefinance-v1.1.0";
+const CACHE = "alinefinance-v1.2.0";
 
 const PRECACHE = [
   "./",
@@ -9,10 +9,13 @@ const PRECACHE = [
   "./vendor/supabase.js",
   "./vendor/chart.umd.js",
   "./manifest.webmanifest",
+  "./icons/logo-256.png",
+  "./icons/logo-512.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/icon-maskable-512.png",
-  "./icons/favicon.svg"
+  "./icons/apple-touch-icon.png",
+  "./icons/favicon-64.png"
 ];
 
 self.addEventListener("install", (event) => {

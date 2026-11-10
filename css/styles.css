@@ -71,23 +71,32 @@ code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-
 .screen-center.active { display: grid; }
 
 /* ---------------- Logo ---------------- */
-.logo-mark {
-  width: 42px; height: 42px; border-radius: 13px;
-  display: grid; place-items: center;
-  background: linear-gradient(140deg, #17b8a4, #0c7a6b 70%);
-  color: #fff; font-weight: 800; letter-spacing: -0.5px; font-size: 15px;
-  box-shadow: 0 10px 20px -10px rgba(12, 122, 107, .8), inset 0 1px 0 rgba(255,255,255,.35);
-  flex: none;
-}
-.logo-mark span { transform: translateY(-0.5px); }
-.logo-mark-lg { width: 84px; height: 84px; border-radius: 26px; font-size: 30px; }
 .logo-row { display: flex; align-items: center; gap: 12px; }
 .logo-name { font-weight: 800; letter-spacing: .14em; font-size: 13px; color: var(--ink); }
 .sidebar-logo .logo-name { color: #fff; }
+.brand-logo-sm {
+  width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex: none;
+  box-shadow: 0 8px 18px -10px rgba(0, 0, 0, .55);
+}
+.sidebar-logo .brand-logo-sm {
+  width: 44px; height: 44px;
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .18);
+}
+.auth-logo {
+  width: clamp(104px, 12vw, 136px); height: auto; aspect-ratio: 1; border-radius: 50%;
+  display: block; box-shadow: 0 24px 50px -22px rgba(0, 0, 0, .55);
+}
+.auth-card-brand { display: none; align-items: center; gap: 10px; }
+.auth-card-brand img { width: 44px; height: 44px; border-radius: 50%; }
+.auth-card-brand span { font-weight: 800; letter-spacing: .14em; font-size: 12px; color: var(--ink); }
+.splash-logo {
+  width: clamp(128px, 22vw, 168px); height: auto; aspect-ratio: 1; border-radius: 50%;
+  box-shadow: 0 30px 60px -26px rgba(10, 60, 52, .55);
+  animation: fadeUp .5s ease both;
+}
 
 /* ---------------- Splash ---------------- */
 .splash-inner { text-align: center; display: grid; justify-items: center; gap: 12px; }
-.splash-title { font-size: clamp(26px, 5vw, 34px); letter-spacing: .16em; color: var(--brand-700); }
 .splash-sub { color: var(--muted); letter-spacing: .04em; }
 .loader { display: flex; gap: 7px; margin-top: 18px; }
 .loader span {
@@ -534,6 +543,7 @@ code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-
   .auth-wrap { grid-template-columns: 1fr; }
   .auth-hero { display: none; }
   .auth-card { padding: 30px 24px; }
+  .auth-card-brand { display: flex; }
   .grid-3 { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 640px) {
