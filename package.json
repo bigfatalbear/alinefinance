@@ -1,0 +1,14 @@
+{
+  "name": "alinefinance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ALINEFINANCE - PWA de controle financeiro pessoal com Supabase",
+  "scripts": {
+    "dev": "npx --yes serve . -l 4173",
+    "start": "npx --yes serve . -l 4173"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "chart.js": "^4.4.0"
+  }
+}

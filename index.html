@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f8f7e" />
+  <meta name="description" content="ALINEFINANCE - controle financeiro pessoal intuitivo com acompanhamento, orçamento, metas e dicas." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="ALINEFINANCE" />
+  <title>ALINEFINANCE · Controle Financeiro</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- SPLASH -->
+    <section id="splash-screen" class="screen screen-center active" aria-label="Carregando">
+      <div class="splash-inner">
+        <div class="logo-mark logo-mark-lg" aria-hidden="true">
+          <span>AF</span>
+        </div>
+        <h1 class="splash-title">ALINEFINANCE</h1>
+        <p class="splash-sub">Seu dinheiro, com clareza.</p>
+        <div class="loader" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+    </section>
+
+    <!-- AUTH -->
+    <section id="auth-screen" class="screen screen-auth" aria-label="Entrar">
+      <div class="auth-wrap">
+        <aside class="auth-hero">
+          <div class="logo-row">
+            <div class="logo-mark" aria-hidden="true"><span>AF</span></div>
+            <span class="logo-name">ALINEFINANCE</span>
+          </div>
+          <h2>Organize seu dinheiro<br />e respire tranquila.</h2>
+          <p>Acompanhe receitas, despesas, orçamento e metas em um só lugar — com dicas inteligentes para o seu perfil.</p>
+          <ul class="hero-list">
+            <li><span class="tick">✓</span> Visão clara do mês</li>
+            <li><span class="tick">✓</span> Orçamento por categoria</li>
+            <li><span class="tick">✓</span> Metas e relatórios</li>
+            <li><span class="tick">✓</span> Dicas personalizadas</li>
+          </ul>
+          <div class="hero-glow" aria-hidden="true"></div>
+        </aside>
+
+        <div class="auth-card">
+          <div class="auth-tabs" role="tablist">
+            <button class="auth-tab active" data-auth-tab="login" role="tab" aria-selected="true">Entrar</button>
+            <button class="auth-tab" data-auth-tab="signup" role="tab" aria-selected="false">Criar conta</button>
+          </div>
+
+          <form id="login-form" class="auth-form" autocomplete="on">
+            <h3>Bem-vinda de volta</h3>
+            <p class="muted">Acesse sua conta para continuar.</p>
+            <label class="field">
+              <span>E-mail</span>
+              <input type="email" name="email" required placeholder="voce@email.com" autocomplete="email" />
+            </label>
+            <label class="field">
+              <span>Senha</span>
+              <input type="password" name="password" required minlength="6" placeholder="Sua senha" autocomplete="current-password" />
+            </label>
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            <button type="button" class="link-btn" id="forgot-password">Esqueci minha senha</button>
+          </form>
+
+          <form id="signup-form" class="auth-form hidden" autocomplete="on">
+            <h3>Crie sua conta</h3>
+            <p class="muted">Leva menos de um minuto.</p>
+            <label class="field">
+              <span>Nome</span>
+              <input type="text" name="full_name" required placeholder="Seu nome" autocomplete="name" />
+            </label>
+            <label class="field">
+              <span>E-mail</span>
+              <input type="email" name="email" required placeholder="voce@email.com" autocomplete="email" />
+            </label>
+            <label class="field">
+              <span>Senha</span>
+              <input type="password" name="password" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+            </label>
+            <button type="submit" class="btn btn-primary btn-block">Criar conta</button>
+            <p class="fineprint">Ao criar a conta você concorda com o uso dos dados apenas para o funcionamento do app.</p>
+          </form>
+
+          <div id="auth-message" class="auth-message hidden" role="status"></div>
+
+          <div id="config-warning" class="config-warning hidden">
+            <strong>Supabase não configurado.</strong>
+            <span>Edite <code>js/config.js</code> com a URL e a anon key do seu projeto Supabase.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONBOARDING -->
+    <section id="onboarding-screen" class="screen screen-onboarding" aria-label="Conhecer você">
+      <div class="onboarding-card">
+        <div class="onboarding-top">
+          <div class="logo-row">
+            <div class="logo-mark" aria-hidden="true"><span>AF</span></div>
+            <span class="logo-name">ALINEFINANCE</span>
+          </div>
+          <button class="icon-btn hidden" id="onboarding-exit" title="Sair" aria-label="Sair">⏻</button>
+        </div>
+
+        <div class="onboarding-progress" aria-hidden="true">
+          <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+
+        <!-- step 0 -->
+        <div class="onboarding-step active" data-step="0">
+          <div class="onboarding-illustration" aria-hidden="true">
+            <div class="coin coin-1">R$</div>
+            <div class="coin coin-2">%</div>
+            <div class="chart-mini">
+              <span style="height:38%"></span><span style="height:62%"></span><span style="height:48%"></span><span style="height:84%"></span><span style="height:70%"></span>
+            </div>
+          </div>
+          <h2>Vamos conhecer você</h2>
+          <p class="muted center">Em 3 passos rápidos vamos personalizar sua experiência e suas dicas financeiras.</p>
+          <ul class="onboarding-highlights">
+            <li><strong>Apresentação</strong><span>Descubra como o app funciona</span></li>
+            <li><strong>Seu perfil</strong><span>Renda e objetivo principal</span></li>
+            <li><strong>Personalização</strong><span>Dicas feitas para você</span></li>
+          </ul>
+          <button class="btn btn-primary btn-block" data-next-step>Começar</button>
+        </div>
+
+        <!-- step 1 -->
+        <form class="onboarding-step" data-step="1" id="onboarding-step-1">
+          <h2>Como podemos te chamar?</h2>
+          <p class="muted">Esses dados ficam salvos no seu perfil.</p>
+          <label class="field">
+            <span>Seu nome</span>
+            <input type="text" name="full_name" required placeholder="Seu primeiro nome" />
+          </label>
+          <label class="field">
+            <span>Renda mensal aproximada (R$)</span>
+            <input type="number" name="monthly_income" min="0" step="0.01" placeholder="0,00" inputmode="decimal" />
+          </label>
+          <label class="field">
+            <span>Como você se sente hoje com suas finanças?</span>
+            <select name="challenge">
+              <option value="controlar_gastos">Preciso controlar melhor os gastos</option>
+              <option value="sair_dividas">Quero sair das dívidas</option>
+              <option value="economizar">Quero começar a economizar</option>
+              <option value="investir">Quero investir mais</option>
+              <option value="organizar">Só quero me organizar</option>
+            </select>
+          </label>
+          <div class="step-actions">
+            <button type="button" class="btn btn-ghost" data-prev-step>Voltar</button>
+            <button type="submit" class="btn btn-primary">Continuar</button>
+          </div>
+        </form>
+
+        <!-- step 2 -->
+        <form class="onboarding-step" data-step="2" id="onboarding-step-2">
+          <h2>Qual é o seu objetivo principal?</h2>
+          <p class="muted">Usamos isso para montar suas dicas.</p>
+          <div class="choice-grid" role="radiogroup" aria-label="Objetivo principal">
+            <label class="choice"><input type="radio" name="main_goal" value="economizar" required /><span class="choice-body"><strong>Economizar</strong><em>Criar reserva e poupar</em></span></label>
+            <label class="choice"><input type="radio" name="main_goal" value="sair_dividas" /><span class="choice-body"><strong>Sair das dívidas</strong><em>Quitar e respirar</em></span></label>
+            <label class="choice"><input type="radio" name="main_goal" value="investir" /><span class="choice-body"><strong>Investir</strong><em>Fazer o dinheiro render</em></span></label>
+            <label class="choice"><input type="radio" name="main_goal" value="realizar_sonho" /><span class="choice-body"><strong>Realizar um sonho</strong><em>Viagem, casa, curso...</em></span></label>
+          </div>
+          <label class="field">
+            <span>Perfil de risco</span>
+            <select name="risk_profile">
+              <option value="conservador">Conservador — segurança primeiro</option>
+              <option value="moderado" selected>Moderado — equilíbrio</option>
+              <option value="arrojado">Arrojado — aceito oscilações</option>
+            </select>
+          </label>
+          <div class="step-actions">
+            <button type="button" class="btn btn-ghost" data-prev-step>Voltar</button>
+            <button type="submit" class="btn btn-primary">Finalizar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- MAIN APP -->
+    <div id="main-app" class="main-app hidden">
+      <aside class="sidebar">
+        <div class="logo-row sidebar-logo">
+          <div class="logo-mark" aria-hidden="true"><span>AF</span></div>
+          <span class="logo-name">ALINEFINANCE</span>
+        </div>
+        <nav class="side-nav" aria-label="Navegação principal">
+          <button class="nav-item active" data-view="dashboard"><span class="nav-ico">▦</span> Visão geral</button>
+          <button class="nav-item" data-view="transactions"><span class="nav-ico">⇄</span> Transações</button>
+          <button class="nav-item" data-view="budgets"><span class="nav-ico">◎</span> Orçamento</button>
+          <button class="nav-item" data-view="goals"><span class="nav-ico">★</span> Metas</button>
+          <button class="nav-item" data-view="reports"><span class="nav-ico">▤</span> Relatórios</button>
+          <button class="nav-item" data-view="tips"><span class="nav-ico">✦</span> Dicas</button>
+          <button class="nav-item" data-view="profile"><span class="nav-ico">☺</span> Perfil</button>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="mini-tip" id="sidebar-tip"></div>
+          <button class="btn btn-ghost btn-block" id="install-btn" hidden>Instalar app</button>
+        </div>
+      </aside>
+
+      <div class="app-body">
+        <header class="topbar">
+          <div class="topbar-title">
+            <h1 id="page-title">Visão geral</h1>
+            <p id="page-subtitle" class="muted">Carregando...</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="btn btn-primary btn-sm" id="quick-add">+ Nova transação</button>
+            <div class="avatar" id="user-avatar" title="Perfil">A</div>
+          </div>
+        </header>
+
+        <main id="view-root" class="view-root" tabindex="-1"></main>
+
+        <nav class="bottom-nav" aria-label="Navegação">
+          <button class="bottom-item active" data-view="dashboard"><span>▦</span><em>Início</em></button>
+          <button class="bottom-item" data-view="transactions"><span>⇄</span><em>Transações</em></button>
+          <button class="bottom-item bottom-add" id="bottom-add" aria-label="Nova transação"><span>+</span></button>
+          <button class="bottom-item" data-view="reports"><span>▤</span><em>Relatórios</em></button>
+          <button class="bottom-item" data-view="tips"><span>✦</span><em>Dicas</em></button>
+        </nav>
+      </div>
+    </div>
+
+    <div id="modal-root"></div>
+    <div id="toast-root" class="toast-root" aria-live="polite"></div>
+  </div>
+
+  <script src="vendor/supabase.js"></script>
+  <script src="vendor/chart.umd.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
