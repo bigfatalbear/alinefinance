@@ -68,9 +68,9 @@ Abra <http://localhost:4173>.
 
 ## Deploy no GitHub Pages
 
-O workflow `.github/workflows/deploy-pages.yml` publica o site ao enviar alterações para `main` ou ao iniciá-lo manualmente em **Actions → Deploy static site to GitHub Pages → Run workflow**.
+O GitHub Pages publica automaticamente a raiz da branch `main` quando há um novo commit. O GitHub executa o workflow gerenciado `pages-build-deployment` para construir e publicar o site.
 
-Em **Settings → Pages**, selecione **GitHub Actions** como origem de publicação. Depois que o workflow terminar, acesse `https://SEU-USUARIO.github.io/alinefinance/`.
+Na configuração atual, a origem é **Deploy from a branch**, `main` e `/ (root)`. Depois que o workflow terminar, acesse `https://SEU-USUARIO.github.io/alinefinance/`.
 
 O arquivo `.nojekyll` já está incluído para servir os arquivos corretamente.
 
