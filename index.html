@@ -64,10 +64,13 @@
               <span>E-mail</span>
               <input type="email" name="email" required placeholder="voce@email.com" autocomplete="email" />
             </label>
-            <label class="field">
-              <span>Senha</span>
-              <input type="password" name="password" required minlength="6" placeholder="Sua senha" autocomplete="current-password" />
-            </label>
+            <div class="field">
+              <label for="login-password">Senha</label>
+              <div class="password-input-wrap">
+                <input id="login-password" type="password" name="password" required minlength="6" placeholder="Sua senha" autocomplete="current-password" />
+                <button type="button" class="password-toggle" id="toggle-login-password" aria-controls="login-password" aria-label="Mostrar senha">Mostrar</button>
+              </div>
+            </div>
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             <button type="button" class="link-btn" id="forgot-password">Esqueci minha senha</button>
           </form>

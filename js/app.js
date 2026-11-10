@@ -1351,9 +1351,25 @@
 
   /* ----------------------------- static bindings ----------------------------- */
   function bindStaticEvents() {
+    const loginPassword = $("#login-password");
+    const loginPasswordToggle = $("#toggle-login-password");
+    const hideLoginPassword = () => {
+      loginPassword.type = "password";
+      loginPasswordToggle.textContent = "Mostrar";
+      loginPasswordToggle.setAttribute("aria-label", "Mostrar senha");
+    };
+
+    loginPasswordToggle.addEventListener("click", () => {
+      const showPassword = loginPassword.type === "password";
+      loginPassword.type = showPassword ? "text" : "password";
+      loginPasswordToggle.textContent = showPassword ? "Ocultar" : "Mostrar";
+      loginPasswordToggle.setAttribute("aria-label", showPassword ? "Ocultar senha" : "Mostrar senha");
+    });
+
     // auth tabs
     $$("[data-auth-tab]").forEach((tab) => tab.addEventListener("click", () => {
       const target = tab.dataset.authTab;
+      if (target !== "login") hideLoginPassword();
       $$("[data-auth-tab]").forEach((t) => {
         t.classList.toggle("active", t === tab);
         t.setAttribute("aria-selected", t === tab ? "true" : "false");
