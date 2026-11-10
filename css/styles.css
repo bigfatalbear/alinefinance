@@ -424,7 +424,8 @@ code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-
 .budget-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .budget-top strong { font-size: .95rem; }
 .budget-top .pct { font-size: .8rem; font-weight: 700; color: var(--muted); }
-.budget-nums { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); }
+.budget-nums { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font-size: .78rem; color: var(--muted); }
+.budget-nums span:last-child { text-align: right; }
 .budget-nums b { color: var(--ink-soft); }
 .budget-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .budget-foot .badge { font-size: .68rem; }

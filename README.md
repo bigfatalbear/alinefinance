@@ -2,6 +2,8 @@
 
 PWA de controle financeiro pessoal com interface intuitiva, acompanhamento de gastos, orçamento, metas, relatórios e dicas financeiras personalizadas. Os dados ficam no **Supabase** e o app é publicado no **GitHub Pages**.
 
+> **App online:** <https://bigfatalbear.github.io/alinefinance/>
+
 ## Funcionalidades
 
 - Tela inicial de apresentação e onboarding para conhecer o usuário (nome, renda, objetivo, perfil de risco e desafio)
@@ -50,7 +52,7 @@ window.ALINE_CONFIG = {
 };
 ```
 
-5. Em **Authentication → Providers → Email**, ajuste a confirmação de e-mail conforme a sua preferência. Para testes rápidos, desative **Confirm email**.
+5. Em **Authentication → Providers → Email**, ajuste a confirmação de e-mail conforme a sua preferência. Neste projeto a confirmação automática está **ativada** (`mailer_autoconfirm`) para facilitar o primeiro acesso; reative o **Confirm email** se quiser exigir confirmação.
 6. Em **Authentication → URL Configuration**, adicione a URL do GitHub Pages em **Site URL** e **Redirect URLs** (ex.: `https://SEU-USUARIO.github.io/alinefinance/`).
 
 > A `anon key` é pública por design. A proteção dos dados é feita pelas políticas de RLS incluídas na migration.

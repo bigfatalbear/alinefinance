@@ -1,4 +1,4 @@
-const CACHE = "alinefinance-v1.0.0";
+const CACHE = "alinefinance-v1.1.0";
 
 const PRECACHE = [
   "./",
