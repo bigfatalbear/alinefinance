@@ -1366,10 +1366,40 @@
       loginPasswordToggle.setAttribute("aria-label", showPassword ? "Ocultar senha" : "Mostrar senha");
     });
 
+    const signupPassword = $("#signup-password");
+    const signupPasswordConfirmation = $("#signup-password-confirmation");
+    const signupPasswordToggles = [
+      { input: signupPassword, button: $("#toggle-signup-password"), hiddenLabel: "Mostrar senha", visibleLabel: "Ocultar senha" },
+      { input: signupPasswordConfirmation, button: $("#toggle-signup-password-confirmation"), hiddenLabel: "Mostrar senha repetida", visibleLabel: "Ocultar senha repetida" }
+    ];
+    const hideSignupPasswords = () => {
+      signupPasswordToggles.forEach(({ input, button, hiddenLabel }) => {
+        input.type = "password";
+        button.textContent = "Mostrar";
+        button.setAttribute("aria-label", hiddenLabel);
+      });
+    };
+    signupPasswordToggles.forEach(({ input, button, hiddenLabel, visibleLabel }) => {
+      button.addEventListener("click", () => {
+        const showPassword = input.type === "password";
+        input.type = showPassword ? "text" : "password";
+        button.textContent = showPassword ? "Ocultar" : "Mostrar";
+        button.setAttribute("aria-label", showPassword ? visibleLabel : hiddenLabel);
+      });
+    });
+    const validateSignupPasswordConfirmation = () => {
+      signupPasswordConfirmation.setCustomValidity(
+        signupPassword.value === signupPasswordConfirmation.value ? "" : "As senhas não coincidem."
+      );
+    };
+    signupPassword.addEventListener("input", validateSignupPasswordConfirmation);
+    signupPasswordConfirmation.addEventListener("input", validateSignupPasswordConfirmation);
+
     // auth tabs
     $$("[data-auth-tab]").forEach((tab) => tab.addEventListener("click", () => {
       const target = tab.dataset.authTab;
       if (target !== "login") hideLoginPassword();
+      if (target !== "signup") hideSignupPasswords();
       $$("[data-auth-tab]").forEach((t) => {
         t.classList.toggle("active", t === tab);
         t.setAttribute("aria-selected", t === tab ? "true" : "false");
@@ -1405,6 +1435,11 @@
     // signup
     $("#signup-form").addEventListener("submit", async (e) => {
       e.preventDefault();
+      validateSignupPasswordConfirmation();
+      if (!signupPasswordConfirmation.validity.valid) {
+        signupPasswordConfirmation.reportValidity();
+        return;
+      }
       if (!sb) { showAuthMessage("Supabase não configurado. Edite js/config.js.", "error"); return; }
       const fd = new FormData(e.target);
       const btn = e.target.querySelector('[type="submit"]');
