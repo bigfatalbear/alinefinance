@@ -37,6 +37,7 @@
 
 * { box-sizing: border-box; }
 
+html { font-size: 17px; }
 html, body { height: 100%; }
 
 body {
@@ -55,7 +56,7 @@ body {
 h1, h2, h3, h4 { margin: 0; line-height: 1.18; letter-spacing: -0.02em; }
 p { margin: 0; }
 button, input, select, textarea { font: inherit; color: inherit; }
-button { cursor: pointer; }
+button { cursor: pointer; touch-action: manipulation; }
 a { color: var(--brand-600); }
 code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-size: .92em; }
 .hidden { display: none !important; }
@@ -140,7 +141,7 @@ code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-
 .auth-card { padding: clamp(26px, 4vw, 52px); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
 .auth-tabs { display: inline-flex; padding: 5px; gap: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; align-self: flex-start; }
 .auth-tab {
-  border: 0; background: transparent; padding: 9px 20px; border-radius: 999px;
+  border: 0; background: transparent; min-height: 44px; padding: 9px 20px; border-radius: 999px;
   font-weight: 600; color: var(--muted); transition: .2s;
 }
 .auth-tab.active { background: var(--surface); color: var(--brand-700); box-shadow: var(--shadow-sm); }
@@ -185,20 +186,22 @@ code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-
 
 /* ---------------- Fields ---------------- */
 .field { display: grid; gap: 6px; }
-.field > span, .field > label { font-size: .82rem; font-weight: 600; color: var(--ink-soft); }
+.field > span, .field > label { font-size: .88rem; font-weight: 600; color: var(--ink-soft); }
 .field input, .field select, .field textarea {
   width: 100%; border: 1px solid var(--line-strong); background: var(--surface);
-  border-radius: 12px; padding: 12px 13px; font-size: .95rem; outline: none;
+  border-radius: 12px; min-height: 48px; padding: 12px 13px; font-size: 1rem; outline: none;
   transition: border-color .2s, box-shadow .2s, background .2s;
 }
 .password-input-wrap { position: relative; }
-.password-input-wrap input { padding-right: 82px; }
+.password-input-wrap input { padding-right: 88px; }
 .password-toggle {
-  position: absolute; top: 50%; right: 12px; transform: translateY(-50%);
-  border: 0; padding: 4px; background: transparent; color: var(--brand-700);
-  font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
+  position: absolute; top: 50%; right: 4px; transform: translateY(-50%);
+  border: 0; min-width: 60px; min-height: 44px; padding: 8px; border-radius: 9px;
+  background: transparent; color: var(--brand-700); font: inherit; font-size: .88rem;
+  font-weight: 700; cursor: pointer; z-index: 1;
 }
-.password-toggle:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+.password-toggle:hover { background: var(--mint-2); }
+.password-toggle:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 .field input:focus, .field select:focus, .field textarea:focus {
   border-color: var(--brand); box-shadow: 0 0 0 4px rgba(15, 143, 126, .13);
 }

@@ -1349,48 +1349,40 @@
     $$("[data-go]", root).forEach((b) => b.addEventListener("click", () => setView(b.dataset.go)));
   }
 
+  function bindPasswordToggle(input, button, hiddenLabel, visibleLabel) {
+    const setVisibility = (visible) => {
+      input.type = visible ? "text" : "password";
+      button.textContent = visible ? "Ocultar" : "Mostrar";
+      button.setAttribute("aria-label", visible ? visibleLabel : hiddenLabel);
+      button.setAttribute("aria-pressed", String(visible));
+    };
+
+    button.addEventListener("click", () => setVisibility(input.type === "password"));
+    return () => setVisibility(false);
+  }
+
   /* ----------------------------- static bindings ----------------------------- */
   function bindStaticEvents() {
     const loginPassword = $("#login-password");
     const loginPasswordToggle = $("#toggle-login-password");
-    const hideLoginPassword = () => {
-      loginPassword.type = "password";
-      loginPasswordToggle.textContent = "Mostrar";
-      loginPasswordToggle.setAttribute("aria-label", "Mostrar senha");
-    };
-
-    loginPasswordToggle.addEventListener("click", () => {
-      const showPassword = loginPassword.type === "password";
-      loginPassword.type = showPassword ? "text" : "password";
-      loginPasswordToggle.textContent = showPassword ? "Ocultar" : "Mostrar";
-      loginPasswordToggle.setAttribute("aria-label", showPassword ? "Ocultar senha" : "Mostrar senha");
-    });
+    const hideLoginPassword = bindPasswordToggle(
+      loginPassword,
+      loginPasswordToggle,
+      "Mostrar senha",
+      "Ocultar senha"
+    );
 
     const signupPassword = $("#signup-password");
     const signupPasswordConfirmation = $("#signup-password-confirmation");
     const signupPasswordToggles = [
-      { input: signupPassword, button: $("#toggle-signup-password"), hiddenLabel: "Mostrar senha", visibleLabel: "Ocultar senha" },
-      { input: signupPasswordConfirmation, button: $("#toggle-signup-password-confirmation"), hiddenLabel: "Mostrar senha repetida", visibleLabel: "Ocultar senha repetida" }
+      bindPasswordToggle(signupPassword, $("#toggle-signup-password"), "Mostrar senha", "Ocultar senha"),
+      bindPasswordToggle(signupPasswordConfirmation, $("#toggle-signup-password-confirmation"), "Mostrar senha repetida", "Ocultar senha repetida")
     ];
-    const hideSignupPasswords = () => {
-      signupPasswordToggles.forEach(({ input, button, hiddenLabel }) => {
-        input.type = "password";
-        button.textContent = "Mostrar";
-        button.setAttribute("aria-label", hiddenLabel);
-      });
-    };
-    signupPasswordToggles.forEach(({ input, button, hiddenLabel, visibleLabel }) => {
-      button.addEventListener("click", () => {
-        const showPassword = input.type === "password";
-        input.type = showPassword ? "text" : "password";
-        button.textContent = showPassword ? "Ocultar" : "Mostrar";
-        button.setAttribute("aria-label", showPassword ? visibleLabel : hiddenLabel);
-      });
-    });
+    const hideSignupPasswords = () => signupPasswordToggles.forEach((hide) => hide());
     const validateSignupPasswordConfirmation = () => {
-      signupPasswordConfirmation.setCustomValidity(
-        signupPassword.value === signupPasswordConfirmation.value ? "" : "As senhas não coincidem."
-      );
+      const matches = signupPassword.value === signupPasswordConfirmation.value;
+      signupPasswordConfirmation.setCustomValidity(matches ? "" : "As senhas não coincidem.");
+      signupPasswordConfirmation.setAttribute("aria-invalid", String(!matches));
     };
     signupPassword.addEventListener("input", validateSignupPasswordConfirmation);
     signupPasswordConfirmation.addEventListener("input", validateSignupPasswordConfirmation);

@@ -1,4 +1,4 @@
-const CACHE = "alinefinance-v1.2.0";
+const CACHE = "alinefinance-v1.2.1";
 
 const PRECACHE = [
   "./",
@@ -39,15 +39,23 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  if (request.mode === "navigate") {
+  const isNavigation = request.mode === "navigate";
+  const isAppAsset = /\.(?:css|js)$/.test(url.pathname);
+
+  if (isNavigation || isAppAsset) {
+    const networkRequest = new Request(request, { cache: "no-cache" });
     event.respondWith(
-      fetch(request)
+      fetch(networkRequest)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE).then((cache) => cache.put(request, copy));
+          if (response && response.status === 200 && response.type === "basic") {
+            const copy = response.clone();
+            caches.open(CACHE).then((cache) => cache.put(request, copy));
+          }
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html")))
+        .catch(() => caches.match(request).then((cached) =>
+          cached || (isNavigation ? caches.match("./index.html") : undefined)
+        ))
     );
     return;
   }
